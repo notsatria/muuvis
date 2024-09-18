@@ -7,4 +7,56 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
         <item name="postSplashScreenTheme">@style/Theme.Muuvis</item>
     </style>
+
+    <style name="SourceSans">
+        <item name="fontFamily">@font/source_sans3</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SourceSans.ExtraLight">
+        <item name="android:fontFamily">@font/source_sans3_extralight</item>
+    </style>
+
+    <style name="SourceSans.Light">
+        <item name="android:fontFamily">@font/source_sans3_light</item>
+    </style>
+
+    <style name="SourceSans.Medium">
+        <item name="android:fontFamily">@font/source_sans3_medium</item>
+    </style>
+
+    <style name="SourceSans.SemiBold">
+        <item name="fontFamily">@font/source_sans3_semibold</item>
+    </style>
+
+    <style name="SourceSans.Bold">
+        <item name="fontFamily">@font/source_sans3_bold</item>
+    </style>
+
+    <style name="SourceSans.ExtraBold">
+        <item name="fontFamily">@font/source_sans3_extrabold</item>
+    </style>
+
+    <style name="SourceSans.Black">
+        <item name="fontFamily">@font/source_sans3_black</item>
+    </style>
+    
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/blue</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.App.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/blue</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.App.MaterialDivider" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerColor">@color/divider_color</item>
+    </style>
+
 </resources>

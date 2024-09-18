@@ -3,4 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="subtitle_onboarding_1">Jelajahi ribuan film terbaru dan klasik, dari berbagai genre. Mulai dari aksi hingga drama, temukan rekomendasi film yang sesuai dengan seleramu.</string>
+    <string name="title_onboarding_1">Selamat datang di Muuvis</string>
+    <string name="next">Lanjut</string>
+    <string name="enter">Masuk</string>
+    <string name="title_onboarding_2">Buat Daftar Filmmu</string>
+    <string name="subtitle_onboarding_2">Simpan film yang ingin kamu tonton dalam daftar favoritmu. Jangan pernah ketinggalan film yang ingin kamu nikmati!</string>
+    <string name="title_onboarding_3">Rating dan Ulasan</string>
+    <string name="subtitle_onboarding_3">Berikan penilaian dan ulasan untuk film yang sudah kamu tonton, dan lihat rekomendasi berdasarkan minatmu</string>
 </resources>

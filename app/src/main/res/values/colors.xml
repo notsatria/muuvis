@@ -151,4 +151,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="navy_dark">#FF232336</color>
+    <color name="indigo">#363653</color>
+    <color name="text_white">#EEEEEE</color>
+    <color name="blue">#5436FF</color>
+    <color name="transparent">#000000</color>
+    <color name="divider_color">#ECEDEF</color>
+
 </resources>

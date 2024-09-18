@@ -1,4 +1,4 @@
-package com.notsatria.muuvis.ui.home
+package com.notsatria.muuvis.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

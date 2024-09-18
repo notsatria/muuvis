@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Muuvis</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_my_profile">My Profile</string>
     <string name="subtitle_onboarding_1">Jelajahi ribuan film terbaru dan klasik, dari berbagai genre. Mulai dari aksi hingga drama, temukan rekomendasi film yang sesuai dengan seleramu.</string>
     <string name="title_onboarding_1">Selamat datang di Muuvis</string>
     <string name="next">Lanjut</string>

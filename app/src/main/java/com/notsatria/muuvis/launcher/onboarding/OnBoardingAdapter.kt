@@ -17,7 +17,7 @@ class OnBoardingAdapter : RecyclerView.Adapter<OnBoardingAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): OnBoardingAdapter.ViewHolder {
+    ): ViewHolder {
         return ViewHolder(
             ItemOnboardingBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -27,7 +27,7 @@ class OnBoardingAdapter : RecyclerView.Adapter<OnBoardingAdapter.ViewHolder>() {
         )
     }
 
-    override fun onBindViewHolder(holder: OnBoardingAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             ivOnboarding.setImageResource(imageList[position])
         }

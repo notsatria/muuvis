@@ -1,11 +1,13 @@
 package com.notsatria.muuvis.launcher.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
+import com.notsatria.muuvis.MainActivity
 import com.notsatria.muuvis.R
-import com.notsatria.muuvis.core.base.BaseFragment
+import com.notsatria.muuvis.core.ui.BaseFragment
 import com.notsatria.muuvis.core.utils.visibleIf
 import com.notsatria.muuvis.databinding.FragmentOnboardingBinding
 
@@ -56,7 +58,8 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
                         title = getString(R.string.title_onboarding_3)
                         subtitle = getString(R.string.subtitle_onboarding_3)
                         btnLoginFull.setOnClickListener {
-                            //TODO
+                            startActivity(Intent(requireContext(), MainActivity::class.java))
+                            requireActivity().finish()
                         }
 
                     }

@@ -12,4 +12,11 @@
     <string name="subtitle_onboarding_2">Simpan film yang ingin kamu tonton dalam daftar favoritmu. Jangan pernah ketinggalan film yang ingin kamu nikmati!</string>
     <string name="title_onboarding_3">Rating dan Ulasan</string>
     <string name="subtitle_onboarding_3">Berikan penilaian dan ulasan untuk film yang sudah kamu tonton, dan lihat rekomendasi berdasarkan minatmu</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="see_all">See all</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="title_release_year">%1$s (%2$s)</string>
+    <string name="search_film">Cari film</string>
 </resources>

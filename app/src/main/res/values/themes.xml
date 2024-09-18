@@ -47,6 +47,7 @@
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
 
+        <item name="android:textColor">@color/text_white</item>
         <item name="fontFamily">@font/source_sans3</item>
         <item name="materialDividerStyle">@style/Widget.App.MaterialDivider</item>
     </style>

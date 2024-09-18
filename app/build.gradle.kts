@@ -69,6 +69,9 @@ dependencies {
 
     // View pager 2
     implementation(libs.androidx.viewpager2)
+
+    // Glide
+    implementation(libs.glide)
 }
 
 kapt {

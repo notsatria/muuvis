@@ -37,6 +37,11 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
                 var title = ""
                 var subtitle = ""
 
+                btnLogin.setOnClickListener {
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    requireActivity().finish()
+                }
+
                 when (position) {
                     0 -> {
                         title = getString(R.string.title_onboarding_1)

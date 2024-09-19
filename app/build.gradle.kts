@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -72,6 +73,16 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.logging.interceptor)
+    debugImplementation(libs.library)
+    releaseImplementation(libs.library.no.op)
+
+    // Shimmer
+    implementation(libs.shimmer)
 }
 
 kapt {

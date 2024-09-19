@@ -1,62 +1,24 @@
 package com.notsatria.muuvis.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.notsatria.muuvis.R
 import com.notsatria.muuvis.core.ui.BaseFragment
-import com.notsatria.muuvis.core.ui.Movie
 import com.notsatria.muuvis.core.ui.MovieAdapter
+import com.notsatria.muuvis.core.utils.Resource
+import com.notsatria.muuvis.core.utils.gone
+import com.notsatria.muuvis.core.utils.visible
 import com.notsatria.muuvis.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private lateinit var adapter: MovieAdapter
-    private val movieList: List<Movie> = listOf(
-        Movie(
-            title = "Batman",
-            genre = "Action",
-            posterImage = R.drawable.il_onboarding_1,
-            releaseYear = "2022"
-        ),
-        Movie(
-            title = "Spiderman",
-            genre = "Action",
-            posterImage = R.drawable.il_onboarding_2,
-            releaseYear = "2022"
-        ),
-        Movie(
-            title = "Ironman",
-            genre = "Action",
-            posterImage = R.drawable.il_onboarding_3,
-            releaseYear = "2022"
-        ),
-        Movie(
-            title = "Captain America",
-            genre = "Action",
-            posterImage = R.drawable.il_onboarding_1,
-            releaseYear = "2022"
-        ),
-        Movie(
-            title = "Thor",
-            genre = "Action",
-            posterImage = R.drawable.il_onboarding_2,
-            releaseYear = "2022"
-        ),
-        Movie(
-            title = "Black Panther",
-            genre = "Action",
-            posterImage = R.drawable.il_onboarding_3,
-            releaseYear = "2022"
-        ),
-        Movie(
-            title = "Doctor Strange",
-            genre = "Action",
-            posterImage = R.drawable.il_onboarding_1,
-            releaseYear = "2022"
-        ),
-    )
+    private val homeViewMovie: HomeViewModel by viewModels()
 
     override fun inflateBinding(inflater: LayoutInflater): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater)
@@ -64,8 +26,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewReady(view: View, savedInstanceState: Bundle?) {
         adapter = MovieAdapter()
-        adapter.setItems(movieList)
+
         binding?.apply {
+            homeViewMovie.nowPlayingMovies.observe(viewLifecycleOwner) { result ->
+                Log.i(TAG, "Result on view: $result ")
+                when (result) {
+                    is Resource.Loading -> {
+                        shimmerNowPlaying.visible()
+                        shimmerPopular.visible()
+                        shimmerTopRated.visible()
+                        shimmerUpcoming.visible()
+                        shimmerNowPlaying.startShimmer()
+                        shimmerPopular.startShimmer()
+                        shimmerTopRated.startShimmer()
+                        shimmerUpcoming.startShimmer()
+                    }
+
+                    is Resource.Success -> {
+                        shimmerNowPlaying.stopShimmer()
+                        shimmerPopular.stopShimmer()
+                        shimmerTopRated.stopShimmer()
+                        shimmerUpcoming.stopShimmer()
+                        shimmerNowPlaying.gone()
+                        shimmerPopular.gone()
+                        shimmerTopRated.gone()
+                        shimmerUpcoming.gone()
+                        adapter.setItems(result.data!!)
+                        Log.d(TAG, "success: ${result.data}")
+                    }
+
+                    is Resource.Error -> {
+                        //
+                    }
+
+                }
+            }
             setupRvNowPlaying()
             setupRvPopular()
             setupRvTopRated()
@@ -99,5 +94,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         rvUpcoming.setHasFixedSize(true)
         rvUpcoming.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    companion object {
+        const val TAG = "HomeFragment"
     }
 }

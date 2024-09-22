@@ -1,7 +1,7 @@
 package com.notsatria.muuvis.di
 
-import com.notsatria.muuvis.core.domain.usecase.MovieInteractor
-import com.notsatria.muuvis.core.domain.usecase.MovieUseCase
+import com.notsatria.core.domain.usecase.MovieInteractor
+import com.notsatria.core.domain.usecase.MovieUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

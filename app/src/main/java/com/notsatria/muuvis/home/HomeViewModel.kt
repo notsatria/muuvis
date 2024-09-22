@@ -2,7 +2,7 @@ package com.notsatria.muuvis.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.notsatria.muuvis.core.domain.usecase.MovieUseCase
+import com.notsatria.core.domain.usecase.MovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -43,20 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvTitle"
-                style="@style/SourceSans.SemiBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="@string/title_onboarding_1"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline7"
-                app:layout_constraintVertical_chainStyle="packed" />
-
             <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                 android:id="@+id/indicator"
                 android:layout_width="wrap_content"
@@ -72,6 +58,21 @@
                 app:layout_constraintTop_toBottomOf="@id/guideline8"
                 app:progressMode="false"
                 app:selectedDotColor="@color/text_white" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/SourceSans.SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/title_onboarding_1"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/indicator"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/tvSubtitle"
@@ -98,7 +99,7 @@
                 app:dividerColor="@color/divider_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
+                app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLoginFull"
@@ -156,8 +157,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="0dp" />
+                app:layout_constraintGuide_end="365dp" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="170dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

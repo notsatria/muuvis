@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.notsatria.muuvis.core.ui.BaseFragment
-import com.notsatria.muuvis.core.ui.MovieAdapter
-import com.notsatria.muuvis.core.utils.Resource
-import com.notsatria.muuvis.core.utils.gone
-import com.notsatria.muuvis.core.utils.visible
+import com.notsatria.core.ui.BaseFragment
+import com.notsatria.core.ui.MovieAdapter
+import com.notsatria.core.utils.Resource
+import com.notsatria.core.utils.gone
+import com.notsatria.core.utils.visible
 import com.notsatria.muuvis.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 

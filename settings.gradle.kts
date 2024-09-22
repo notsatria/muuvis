@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Muuvis"
 include(":app")
- 
+include(":core")

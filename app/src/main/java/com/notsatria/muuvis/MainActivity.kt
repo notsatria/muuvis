@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.notsatria.muuvis.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Locale.setDefault(Locale("id", "ID"))
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

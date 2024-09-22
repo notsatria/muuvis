@@ -8,5 +8,5 @@ import kotlinx.parcelize.Parcelize
 data class GenreResponseList(
 
 	@field:SerializedName("genres")
-	val genres: List<Genre>
+	val genres: List<GenreResponse>
 ) : Parcelable

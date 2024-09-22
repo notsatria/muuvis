@@ -77,6 +77,9 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+
+    // Timber
+    implementation(libs.timber)
 }
 
 kapt {

@@ -2,6 +2,7 @@ package com.notsatria.muuvis.home
 
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -56,7 +57,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     }
 
                     is Resource.Error -> {
-                        //
+                        d(TAG, "error: ${result.message}")
                     }
 
                 }

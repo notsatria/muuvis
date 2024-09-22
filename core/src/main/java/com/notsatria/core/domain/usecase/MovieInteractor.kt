@@ -1,5 +1,6 @@
 package com.notsatria.core.domain.usecase
 
+import com.notsatria.core.domain.model.Genre
 import com.notsatria.core.domain.model.Movie
 import com.notsatria.core.domain.repository.IMovieRepository
 import com.notsatria.core.utils.Resource
@@ -10,5 +11,9 @@ class MovieInteractor @Inject constructor(private val movieRepository: IMovieRep
     MovieUseCase {
     override fun getNowPlayingMovies(): Flow<Resource<List<Movie>>> {
         return movieRepository.getNowPlayingMovies()
+    }
+
+    override fun getMovieGenres(): Flow<Resource<List<Genre>>> {
+        return movieRepository.getMovieGenres()
     }
 }

@@ -11,4 +11,6 @@ class HomeViewModel @Inject constructor(
     movieUseCase: MovieUseCase
 ) : ViewModel() {
     val nowPlayingMovies = movieUseCase.getNowPlayingMovies().asLiveData()
+
+//    val movieGenres = movieUseCase.getMovieGenres().asLiveData()
 }

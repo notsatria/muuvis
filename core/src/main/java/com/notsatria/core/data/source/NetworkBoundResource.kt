@@ -4,8 +4,10 @@ import android.util.Log
 import com.notsatria.core.data.source.remote.network.ApiResponse
 import com.notsatria.core.utils.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
@@ -15,13 +17,12 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             is ApiResponse.Success -> {
                 Log.i("NetworkBoundResource", "ApiResponse success: ${apiResponse.data} ")
                 saveCallResult(apiResponse.data)
-                emit(Resource.Success(mapCallResult(apiResponse.data)))
-//                emitAll(loadFromDB(apiResponse.data).map { Resource.Success(it) })
+//                emit(Resource.Success(mapCallResult(apiResponse.data)))
+                emitAll(loadFromDB().map { Resource.Success(it) })
             }
 
             is ApiResponse.Empty -> {
-                // emitAll(loadFromDB().map { Resource.Success(it) })
-                Resource.Success(emptyList<ResultType>())
+                 emitAll(loadFromDB().map { Resource.Success(it) })
             }
 
             is ApiResponse.Error -> {
@@ -33,11 +34,11 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     protected open fun onFetchFailed() {}
 
-//    protected abstract fun loadFromDB(): Flow<ResultType>
+    protected abstract fun loadFromDB(): Flow<ResultType>
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-    protected abstract fun mapCallResult(data: RequestType): ResultType
+//    protected abstract fun mapCallResult(data: RequestType): ResultType
 
     protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 

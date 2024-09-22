@@ -19,4 +19,6 @@ data class Movie(
     val id: Int,
     val adult: Boolean,
     val voteCount: Int,
+    val isFavorite: Boolean,
+    val movieType: Int
 ) : Parcelable

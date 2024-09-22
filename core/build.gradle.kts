@@ -5,6 +5,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -70,4 +71,13 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    // Timber
+    implementation(libs.timber)
+
+    // Room
+    implementation(libs.room)
+    ksp(libs.roomCompiler)
+    implementation(libs.roomKtx)
+    implementation(libs.roomPaging)
 }

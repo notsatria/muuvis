@@ -36,27 +36,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 Log.i(TAG, "Result on view: $result ")
                 when (result) {
                     is Resource.Loading -> {
-                        shimmerNowPlaying.visible()
-                        shimmerPopular.visible()
-                        shimmerTopRated.visible()
-                        shimmerUpcoming.visible()
-                        shimmerNowPlaying.startShimmer()
-                        shimmerPopular.startShimmer()
-                        shimmerTopRated.startShimmer()
-                        shimmerUpcoming.startShimmer()
+                        includeHomeLoading.apply {
+                            root.visible()
+                            shimmer1.startShimmer()
+                            shimmer2.startShimmer()
+                        }
                     }
 
                     is Resource.Success -> {
-                        shimmerNowPlaying.stopShimmer()
-                        shimmerPopular.stopShimmer()
-                        shimmerTopRated.stopShimmer()
-                        shimmerUpcoming.stopShimmer()
-                        shimmerNowPlaying.gone()
-                        shimmerPopular.gone()
-                        shimmerTopRated.gone()
-                        shimmerUpcoming.gone()
+                        includeHomeLoading.apply {
+                            root.gone()
+                            shimmer1.stopShimmer()
+                            shimmer2.stopShimmer()
+                        }
                         adapter.setItems(result.data!!)
-                        Log.d(TAG, "success: ${result.data}")
+                        d(TAG, "success: ${result.data}")
                     }
 
                     is Resource.Error -> {

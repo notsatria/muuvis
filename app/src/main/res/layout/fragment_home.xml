@@ -73,41 +73,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvNowPlaying" />
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerNowPlaying"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvNowPlaying">
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvNowPlaying"
                 android:layout_width="match_parent"
@@ -149,42 +114,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tvPopular"
                 tools:listitem="@layout/item_movie_poster" />
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerPopular"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPopular">
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
-
             <TextView
                 android:id="@+id/tvTopRated"
                 style="@style/SourceSans.SemiBold"
@@ -215,41 +144,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/tvTopRated"
                 tools:listitem="@layout/item_movie_poster" />
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerTopRated"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTopRated">
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <TextView
                 android:id="@+id/tvUpcoming"
@@ -282,40 +176,14 @@
                 app:layout_constraintTop_toBottomOf="@id/tvUpcoming"
                 tools:listitem="@layout/item_movie_poster" />
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerUpcoming"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+            <include
                 android:visibility="gone"
+                android:id="@+id/includeHomeLoading"
+                layout="@layout/partial_home_loading"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvUpcoming">
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                        <include layout="@layout/item_movie_poster_shimmer" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

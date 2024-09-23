@@ -11,7 +11,10 @@ import com.notsatria.core.ui.BaseFragment
 import com.notsatria.core.ui.MovieAdapter
 import com.notsatria.core.utils.Resource
 import com.notsatria.core.utils.gone
+import com.notsatria.core.utils.navigateById
+import com.notsatria.core.utils.navigateWithBundle
 import com.notsatria.core.utils.visible
+import com.notsatria.muuvis.R
 import com.notsatria.muuvis.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,12 +69,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             setupRvPopular()
             setupRvTopRated()
             setupRvUpcoming()
+
+            icSearch.setOnClickListener {
+                navigateById(R.id.navigation_search)
+            }
         }
     }
 
     private fun FragmentHomeBinding.setupRvNowPlaying() {
         rvNowPlaying.adapter = adapter
         rvNowPlaying.setHasFixedSize(true)
+
+        adapter.onItemClicked = { movie ->
+            val bundle = Bundle().apply {
+                putParcelable("movie", movie)
+            }
+            navigateWithBundle(R.id.action_navigation_home_to_movieDetailFragment, bundle)
+        }
+
         rvNowPlaying.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }

@@ -2,6 +2,7 @@ package com.notsatria.core.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.notsatria.core.R
 import com.notsatria.core.databinding.ItemMoviePosterBinding
 import com.notsatria.core.domain.model.Movie
@@ -11,7 +12,7 @@ import com.notsatria.core.utils.onLoad
 
 class MovieAdapter : BaseRecyclerViewAdapter<Movie, ItemMoviePosterBinding>(listOf()) {
 
-    var onItemClicked: ((Movie) -> Unit)? = null
+    var callback: MovieAdapterCallback? = null
 
     override fun inflateBinding(parent: ViewGroup, viewType: Int): ItemMoviePosterBinding {
         return ItemMoviePosterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,15 +20,33 @@ class MovieAdapter : BaseRecyclerViewAdapter<Movie, ItemMoviePosterBinding>(list
 
     override fun bindItem(binding: ItemMoviePosterBinding, item: Movie, position: Int) {
         binding.apply {
-            root.setOnClickListener { onItemClicked?.invoke(item) }
+            root.setOnClickListener { callback?.onItemClicked(item) }
+
+            ivBookmark.setOnClickListener { callback?.onFavoriteClicked(item) }
+
+            ivBookmark.setImageDrawable(
+                if (item.isFavorite) ContextCompat.getDrawable(
+                    root.context,
+                    R.drawable.ic_bookmark_filled_white_24dp
+                ) else ContextCompat.getDrawable(
+                    root.context,
+                    R.drawable.ic_bookmark_outlined_white_24dp
+                )
+            )
+
             tvTitle.text =
                 root.context.getString(
                     R.string.title_release_year,
                     item.title,
                     item.releaseDate.formatStrToDate("yyyy-MM-dd", "yyyy")
                 )
-            tvGenre.text = item.title
+            tvRate.text = item.voteAverage.toString().subSequence(0, 3)
             ivPoster.onLoad("${Constant.POSTER_IMAGE_BASE_URL}${item.posterPath}")
         }
+    }
+
+    interface MovieAdapterCallback {
+        fun onItemClicked(movie: Movie)
+        fun onFavoriteClicked(movie: Movie)
     }
 }

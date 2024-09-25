@@ -29,7 +29,7 @@ fun View.gone() {
 // Glide extensions
 
 fun ImageView.onLoadDrawable(drawable: Drawable, scaleType: RequestOptions) {
-    Glide.with(this.context)
+    Glide.with(context)
         .load(drawable)
         .apply(scaleType)
         .into(this)
@@ -37,27 +37,27 @@ fun ImageView.onLoadDrawable(drawable: Drawable, scaleType: RequestOptions) {
 
 fun ImageView.onLoad(path: String) {
     if (path != "") {
-        Glide.with(this.context)
+        Glide.with(context)
             .load(path)
             .apply(RequestOptions.centerCropTransform())
             .into(this)
     } else {
-        this.setImageDrawable(null)
+        setImageDrawable(null)
     }
 }
 
 // Navigation extensions
 
 fun Fragment.navigateWithBundle(@IdRes resId: Int, bundle: Bundle) {
-    this.findNavController().navigate(resId, bundle)
+    findNavController().navigate(resId, bundle)
 }
 
 fun Fragment.navigateById(@IdRes resId: Int) {
-    this.findNavController().navigate(resId)
+    findNavController().navigate(resId)
 }
 
 fun Fragment.navigateUp() {
-    this.findNavController().navigateUp()
+    findNavController().navigateUp()
 }
 
 // Date formatter

@@ -1,9 +1,9 @@
 package com.notsatria.core.data.source.remote.network
 
-import com.notsatria.core.data.source.remote.response.GenreResponseList
-import com.notsatria.core.data.source.remote.response.MovieResponse
+import com.notsatria.core.data.source.remote.response.MovieDetailResponse
 import com.notsatria.core.data.source.remote.response.MovieResponseList
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -13,8 +13,9 @@ interface ApiService {
         @Query("page") page: Int = 1,
     ): MovieResponseList
 
-    @GET("genre/movie/list")
-    suspend fun getMovieGenres(
-        @Query("language") language: String = "en",
-    ): GenreResponseList
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetail(
+        @Path("movie_id") movieId: Int,
+        @Query("language") language: String = "en-US"
+    ): MovieDetailResponse
 }

@@ -38,7 +38,7 @@
         android:padding="2dp"
         app:layout_constraintEnd_toEndOf="@id/cvPoster"
         app:layout_constraintTop_toTopOf="@id/cvPoster"
-        app:srcCompat="@drawable/ic_bookmark_white_24dp" />
+        app:srcCompat="@drawable/ic_bookmark_outlined_white_24dp" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -54,14 +54,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvPoster" />
 
-    <TextView
-        android:id="@+id/tvGenre"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="Genre, genre"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_filled_12dp"
+            app:tint="@color/blue" />
+
+        <TextView
+            android:id="@+id/tvRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="rate"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

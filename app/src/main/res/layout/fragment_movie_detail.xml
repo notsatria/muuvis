@@ -59,7 +59,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/tvTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvTitle"
-                app:srcCompat="@drawable/ic_bookmark_white_24dp" />
+                app:srcCompat="@drawable/ic_bookmark_outlined_white_24dp" />
 
             <ImageView
                 android:id="@+id/ivStar"

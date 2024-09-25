@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_favorite"
-        android:icon="@drawable/ic_bookmark_white_24dp"
+        android:icon="@drawable/ic_bookmark_outlined_white_24dp"
         android:title="@string/title_favorite" />
 
     <item

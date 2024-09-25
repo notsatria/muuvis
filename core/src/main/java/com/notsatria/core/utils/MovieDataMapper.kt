@@ -4,7 +4,7 @@ import com.notsatria.core.data.source.local.entity.MovieEntity
 import com.notsatria.core.data.source.remote.response.MovieResponse
 import com.notsatria.core.domain.model.Movie
 
-object DataMapper {
+object MovieDataMapper {
     fun mapResponsesToEntities(input: List<MovieResponse>, movieType: Int): List<MovieEntity> {
         val movieList = ArrayList<MovieEntity>()
         input.map {

@@ -1,18 +1,25 @@
 package com.notsatria.core.data.repository
 
+import android.util.Log
 import com.notsatria.core.data.source.NetworkBoundResource
 import com.notsatria.core.data.source.local.LocalDataSource
 import com.notsatria.core.data.source.remote.RemoteDataSource
 import com.notsatria.core.data.source.remote.network.ApiResponse
-import com.notsatria.core.data.source.remote.response.GenreResponse
 import com.notsatria.core.data.source.remote.response.MovieResponse
-import com.notsatria.core.domain.model.Genre
 import com.notsatria.core.domain.model.Movie
+import com.notsatria.core.domain.model.MovieDetail
 import com.notsatria.core.domain.repository.IMovieRepository
-import com.notsatria.core.utils.DataMapper
+import com.notsatria.core.utils.MovieDataMapper
 import com.notsatria.core.utils.Resource
+import com.notsatria.core.utils.toDomainModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import timber.log.Timber.Forest.d
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,33 +38,48 @@ class MovieRepository @Inject constructor(
             }
 
             override suspend fun saveCallResult(data: List<MovieResponse>) {
-                val movieList = DataMapper.mapResponsesToEntities(data, 1)
+                val movieList = MovieDataMapper.mapResponsesToEntities(data, 1)
                 localDataSource.insertMovies(movieList)
             }
 
             override fun loadFromDB(): Flow<List<Movie>> {
                 return localDataSource.getMoviesByType(1).map {
-                    DataMapper.mapEntitiesToDomain(it)
+                    MovieDataMapper.mapEntitiesToDomain(it)
                 }
             }
         }.asFlow()
 
-    override fun getMovieGenres(): Flow<Resource<List<Genre>>> =
-        object : NetworkBoundResource<List<Genre>, List<GenreResponse>>() {
-            override fun shouldFetch(data: List<Genre>?): Boolean {
-                return true
+    override fun getFavoriteMovies(): Flow<List<Movie>> {
+        return localDataSource.getFavoriteMovies().map {
+            MovieDataMapper.mapEntitiesToDomain(it)
+        }
+    }
+
+    override fun setFavoriteMovie(movie: Movie, state: Boolean) {
+        val movieEntity = MovieDataMapper.mapDomainToEntity(movie)
+        movieEntity.isFavorite = state
+        CoroutineScope(Dispatchers.IO).launch {
+            localDataSource.updateFavoriteMovie(movieEntity.id, state)
+        }
+    }
+
+    override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> = flow {
+        emit(Resource.Loading())
+        when (val apiResponse = remoteDataSource.getMovieDetail(movieId).first()) {
+            is ApiResponse.Success -> {
+                Log.d("getMovieDetail", "${apiResponse.data}")
+                emit(Resource.Success(apiResponse.data.toDomainModel()))
             }
 
-            override fun loadFromDB(): Flow<List<Genre>> {
-                TODO("Not yet implemented")
+            is ApiResponse.Empty -> {
+                d("getMovieDetail", "Empty")
+                emit(Resource.Error("Empty"))
             }
 
-            override suspend fun createCall(): Flow<ApiResponse<List<GenreResponse>>> {
-                return remoteDataSource.getMovieGenres()
+            is ApiResponse.Error -> {
+                d("getMovieDetail", "Error: ${apiResponse.errorMessage}")
+                emit(Resource.Error(apiResponse.errorMessage))
             }
-
-            override suspend fun saveCallResult(data: List<GenreResponse>) {
-                // TODO
-            }
-        }.asFlow()
+        }
+    }
 }

@@ -6,7 +6,10 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.notsatria.core.domain.model.Movie
 import com.notsatria.core.ui.BaseFragment
 import com.notsatria.core.ui.MovieAdapter
 import com.notsatria.core.utils.Resource
@@ -17,12 +20,13 @@ import com.notsatria.core.utils.visible
 import com.notsatria.muuvis.R
 import com.notsatria.muuvis.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private lateinit var adapter: MovieAdapter
-    private val homeViewMovie: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun inflateBinding(inflater: LayoutInflater): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater)
@@ -32,29 +36,51 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         adapter = MovieAdapter()
 
         binding?.apply {
-            homeViewMovie.nowPlayingMovies.observe(viewLifecycleOwner) { result ->
+            homeViewModel.nowPlayingMovies.observe(viewLifecycleOwner) { result ->
                 Log.i(TAG, "Result on view: $result ")
                 when (result) {
                     is Resource.Loading -> {
+                        tvNowPlaying.gone()
+                        tvSeeAllNowPlaying.gone()
+                        tvPopular.gone()
+                        tvSeeAllPopular.gone()
+                        tvTopRated.gone()
+                        tvSeeAllTopRated.gone()
+                        tvUpcoming.gone()
+                        tvSeeAllUpcoming.gone()
+
                         includeHomeLoading.apply {
                             root.visible()
                             shimmer1.startShimmer()
                             shimmer2.startShimmer()
+                            shimmer3.startShimmer()
+                            shimmer4.startShimmer()
                         }
                     }
 
                     is Resource.Success -> {
+                        tvNowPlaying.visible()
+                        tvSeeAllNowPlaying.visible()
+                        tvPopular.visible()
+                        tvSeeAllPopular.visible()
+                        tvTopRated.visible()
+                        tvSeeAllTopRated.visible()
+                        tvUpcoming.visible()
+                        tvSeeAllUpcoming.visible()
+
                         includeHomeLoading.apply {
                             root.gone()
                             shimmer1.stopShimmer()
                             shimmer2.stopShimmer()
+                            shimmer3.stopShimmer()
+                            shimmer4.stopShimmer()
                         }
                         adapter.setItems(result.data!!)
-                        d(TAG, "success: ${result.data}")
+                        Timber.tag(TAG).d("success: " + result.data)
                     }
 
                     is Resource.Error -> {
-                        d(TAG, "error: ${result.message}")
+                        Timber.tag(TAG).d("error: " + result.message)
                     }
 
                 }
@@ -65,7 +91,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             setupRvUpcoming()
 
             icSearch.setOnClickListener {
-                navigateById(R.id.navigation_search)
+                findNavController().navigate(
+                    R.id.navigation_search, null, NavOptions.Builder()
+                        .setPopUpTo(R.id.navigation_home, false)
+                        .build()
+                )
             }
         }
     }
@@ -74,11 +104,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         rvNowPlaying.adapter = adapter
         rvNowPlaying.setHasFixedSize(true)
 
-        adapter.onItemClicked = { movie ->
-            val bundle = Bundle().apply {
-                putParcelable("movie", movie)
+        adapter.callback = object : MovieAdapter.MovieAdapterCallback {
+            override fun onItemClicked(movie: Movie) {
+                val bundle = Bundle().apply {
+                    putParcelable("movie", movie)
+                }
+                navigateWithBundle(R.id.action_navigation_home_to_movieDetailFragment, bundle)
             }
-            navigateWithBundle(R.id.action_navigation_home_to_movieDetailFragment, bundle)
+
+            override fun onFavoriteClicked(movie: Movie) {
+                homeViewModel.setFavoriteMovie(movie, !movie.isFavorite)
+            }
         }
 
         rvNowPlaying.layoutManager =

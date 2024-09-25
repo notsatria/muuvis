@@ -1,7 +1,7 @@
 package com.notsatria.core.domain.usecase
 
-import com.notsatria.core.domain.model.Genre
 import com.notsatria.core.domain.model.Movie
+import com.notsatria.core.domain.model.MovieDetail
 import com.notsatria.core.domain.repository.IMovieRepository
 import com.notsatria.core.utils.Resource
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,15 @@ class MovieInteractor @Inject constructor(private val movieRepository: IMovieRep
         return movieRepository.getNowPlayingMovies()
     }
 
-    override fun getMovieGenres(): Flow<Resource<List<Genre>>> {
-        return movieRepository.getMovieGenres()
+    override fun getFavoriteMovies(): Flow<List<Movie>> {
+        return movieRepository.getFavoriteMovies()
+    }
+
+    override fun setFavoriteMovie(movie: Movie, state: Boolean) {
+        movieRepository.setFavoriteMovie(movie, state)
+    }
+
+    override fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>> {
+        return movieRepository.getMovieDetail(movieId)
     }
 }

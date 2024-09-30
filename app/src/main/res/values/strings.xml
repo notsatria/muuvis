@@ -24,4 +24,5 @@
     <string name="released_on">Released on %1$s</string>
     <string name="vote_average_vote_count">%1$s (%2$s)}</string>
     <string name="movie_added_to_favorite">Movie added to favorite</string>
+    <string name="movie_removed_from_favorite">Movie removed from favorites</string>
 </resources>

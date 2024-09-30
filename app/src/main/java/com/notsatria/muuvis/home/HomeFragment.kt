@@ -16,15 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.notsatria.core.domain.model.Movie
 import com.notsatria.core.ui.BaseFragment
 import com.notsatria.core.ui.MovieAdapter
+import com.notsatria.core.ui.MovieAdapterCallback
 import com.notsatria.core.utils.Resource
-import com.notsatria.core.utils.gone
 import com.notsatria.core.utils.navigateWithBundle
-import com.notsatria.core.utils.visible
 import com.notsatria.core.utils.visibleIf
 import com.notsatria.muuvis.R
 import com.notsatria.muuvis.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import timber.log.Timber.Forest.d
 
 @AndroidEntryPoint
@@ -84,7 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         rvNowPlaying.adapter = nowPlayingAdapter
         rvNowPlaying.setHasFixedSize(true)
 
-        nowPlayingAdapter.callback = object : MovieAdapter.MovieAdapterCallback {
+        nowPlayingAdapter.callback = object : MovieAdapterCallback {
             override fun onItemClicked(movie: Movie, ivPoster: ImageView) {
                 val extras = FragmentNavigatorExtras(ivPoster to movie.id.toString())
                 val bundle = Bundle().apply {
@@ -101,6 +99,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 homeViewModel.setFavoriteMovie(movie, !movie.isFavorite)
                 if (!movie.isFavorite) {
                     showToast(getString(R.string.movie_added_to_favorite))
+                } else {
+                    showToast(getString(R.string.movie_removed_from_favorite))
                 }
             }
         }
@@ -115,7 +115,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         rvPopular.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        popularAdapter.callback = object : MovieAdapter.MovieAdapterCallback {
+        rvPopular.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+
+        popularAdapter.callback = object : MovieAdapterCallback {
             override fun onItemClicked(movie: Movie, ivPoster: ImageView) {
                 val extras = FragmentNavigatorExtras(ivPoster to movie.id.toString())
                 val bundle = Bundle().apply {
@@ -132,6 +136,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 homeViewModel.setFavoriteMovie(movie, !movie.isFavorite)
                 if (!movie.isFavorite) {
                     showToast(getString(R.string.movie_added_to_favorite))
+                } else {
+                    showToast(getString(R.string.movie_removed_from_favorite))
                 }
             }
         }
@@ -143,7 +149,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         rvTopRated.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        topRatedAdapter.callback = object : MovieAdapter.MovieAdapterCallback {
+        rvTopRated.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+
+        topRatedAdapter.callback = object : MovieAdapterCallback {
             override fun onItemClicked(movie: Movie, ivPoster: ImageView) {
                 val extras = FragmentNavigatorExtras(ivPoster to movie.id.toString())
                 val bundle = Bundle().apply {
@@ -160,6 +170,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 homeViewModel.setFavoriteMovie(movie, !movie.isFavorite)
                 if (!movie.isFavorite) {
                     showToast(getString(R.string.movie_added_to_favorite))
+                } else {
+                    showToast(getString(R.string.movie_removed_from_favorite))
                 }
             }
         }
@@ -171,7 +183,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         rvUpcoming.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        upcomingAdapter.callback = object : MovieAdapter.MovieAdapterCallback {
+        rvUpcoming.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+
+        upcomingAdapter.callback = object : MovieAdapterCallback {
             override fun onItemClicked(movie: Movie, ivPoster: ImageView) {
                 val extras = FragmentNavigatorExtras(ivPoster to movie.id.toString())
                 val bundle = Bundle().apply {
@@ -188,6 +204,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 homeViewModel.setFavoriteMovie(movie, !movie.isFavorite)
                 if (!movie.isFavorite) {
                     showToast(getString(R.string.movie_added_to_favorite))
+                } else {
+                    showToast(getString(R.string.movie_removed_from_favorite))
                 }
             }
         }

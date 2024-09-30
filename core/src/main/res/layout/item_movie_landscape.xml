@@ -44,19 +44,24 @@
     <TextView
         android:id="@+id/tvTitle"
         style="@style/SourceSans.SemiBold"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16sp"
         android:text="Title (tahun)"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivBookmark"
         app:layout_constraintStart_toEndOf="@id/cvPoster" />
 
     <TextView
         android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="watchtime - genre"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:text="overview"
         android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/ivBookmark"
         app:layout_constraintStart_toStartOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 

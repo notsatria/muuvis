@@ -47,9 +47,9 @@ class MovieAdapter : BaseRecyclerViewAdapter<Movie, ItemMoviePosterBinding>(list
             root.setOnClickListener { callback?.onItemClicked(item, ivPoster) }
         }
     }
+}
 
-    interface MovieAdapterCallback {
-        fun onItemClicked(movie: Movie, ivPoster: ImageView)
-        fun onFavoriteClicked(movie: Movie)
-    }
+interface MovieAdapterCallback {
+    fun onItemClicked(movie: Movie, ivPoster: ImageView)
+    fun onFavoriteClicked(movie: Movie)
 }

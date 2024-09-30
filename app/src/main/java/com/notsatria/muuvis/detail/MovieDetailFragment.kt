@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.notsatria.core.domain.model.Movie
 import com.notsatria.core.ui.BaseFragment
@@ -37,7 +38,8 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val animation = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        val animation =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         sharedElementEnterTransition = animation
         postponeEnterTransition(300, TimeUnit.MILLISECONDS)
 
@@ -47,6 +49,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewReady(view: View, savedInstanceState: Bundle?) {
         val movie = arguments?.getParcelable("movie", Movie::class.java)
+//        val isFromFavorite = arguments?.getBoolean("isFromFavorite", false)
 
         binding?.apply {
             ivPoster.transitionName = movie?.id.toString()
@@ -63,19 +66,17 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
             )
             tvOverview.text = movie.overview
 
-            val bookmarkIcon =
-                if (movie.isFavorite) R.drawable.ic_bookmark_filled_white_24dp else R.drawable.ic_bookmark_white_24dp
-            ivBookmark.setImageDrawable(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    bookmarkIcon
-                )
-            )
+            var favoriteStatus = movie.isFavorite
+            setFavoriteStatus(favoriteStatus)
 
             ivBookmark.setOnClickListener {
-                homeViewModel.setFavoriteMovie(movie, !movie.isFavorite)
-                if (!movie.isFavorite) {
+                favoriteStatus = !favoriteStatus
+                setFavoriteStatus(favoriteStatus)
+                homeViewModel.setFavoriteMovie(movie, favoriteStatus)
+                if (favoriteStatus) {
                     showToast(getString(R.string.movie_added_to_favorite))
+                } else {
+                    showToast(getString(R.string.movie_removed_from_favorite))
                 }
             }
 
@@ -91,6 +92,12 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
                 showToast("Coming soon...")
             }
         }
+    }
+
+    private fun FragmentMovieDetailBinding.setFavoriteStatus(isFavorite: Boolean) {
+        val bookmarkIcon =
+            if (isFavorite) R.drawable.ic_bookmark_filled_white_24dp else R.drawable.ic_bookmark_white_24dp
+        ivBookmark.setImageDrawable(ContextCompat.getDrawable(requireContext(), bookmarkIcon))
     }
 
     private fun showToast(message: String) {

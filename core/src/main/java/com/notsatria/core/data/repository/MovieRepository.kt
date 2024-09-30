@@ -142,4 +142,10 @@ class MovieRepository @Inject constructor(
                 localDataSource.insertMovies(movieList)
             }
         }.asFlow()
+
+    override fun searchMovies(query: String): Flow<List<Movie>> {
+        return localDataSource.searchMovies(query).map {
+            MovieDataMapper.mapEntitiesToDomain(it)
+        }
+    }
 }

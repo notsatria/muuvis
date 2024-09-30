@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground"
     android:paddingHorizontal="16dp">
 
     <com.google.android.material.card.MaterialCardView
@@ -48,9 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16sp"
         android:text="Title (tahun)"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ivBookmark"
-        app:layout_constraintStart_toEndOf="@id/cvPoster" />
+        app:layout_constraintStart_toEndOf="@id/cvPoster"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSubtitle"

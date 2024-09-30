@@ -20,4 +20,6 @@ class LocalDataSource @Inject constructor(private val movieDao: MovieDao) {
 
     suspend fun updateFavoriteMovie(id: Int, isFavorite: Boolean) =
         movieDao.updateFavoriteMovie(id, isFavorite)
+
+    fun searchMovies(query: String): Flow<List<MovieEntity>> = movieDao.searchMovies(query)
 }

@@ -25,4 +25,9 @@ interface MovieDao {
     @Query("UPDATE movie SET isFavorite = :isFavorite WHERE id = :id")
     suspend fun updateFavoriteMovie(id: Int, isFavorite: Boolean)
 
+    @Query("SELECT * FROM movie WHERE title LIKE '%' || :query || '%' " +
+            "OR overview LIKE '%' || :query || '%' " +
+            "OR releaseDate LIKE '%' || :query || '%' " +
+            " ORDER BY releaseDate DESC")
+    fun searchMovies(query: String): Flow<List<MovieEntity>>
 }

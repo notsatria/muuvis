@@ -21,4 +21,5 @@ interface IMovieRepository {
 
     fun getUpcomingMovies(): Flow<Resource<List<Movie>>>
 
+    fun searchMovies(query: String): Flow<List<Movie>>
 }

@@ -25,4 +25,6 @@
     <string name="vote_average_vote_count">%1$s (%2$s)}</string>
     <string name="movie_added_to_favorite">Movie added to favorite</string>
     <string name="movie_removed_from_favorite">Movie removed from favorites</string>
+    <string name="movie_not_found_please_input_another_keyword">Movie not found, please input another keyword</string>
+    <string name="search_result">Search result</string>
 </resources>

@@ -1,13 +1,15 @@
 package com.notsatria.muuvis.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.notsatria.core.domain.model.Movie
+import com.notsatria.core.domain.usecase.MovieUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(private val movieUseCase: MovieUseCase) : ViewModel() {
+    fun searchMovies(query: String) = movieUseCase.searchMovies(query).asLiveData()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun setFavoriteMovie(movie: Movie, state: Boolean) = movieUseCase.setFavoriteMovie(movie, state)
 }

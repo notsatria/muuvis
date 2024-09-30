@@ -20,4 +20,6 @@ interface MovieUseCase {
     fun getTopRatedMovies(): Flow<Resource<List<Movie>>>
 
     fun getUpcomingMovies(): Flow<Resource<List<Movie>>>
+
+    fun searchMovies(query: String): Flow<List<Movie>>
 }

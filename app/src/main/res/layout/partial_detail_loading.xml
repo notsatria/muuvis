@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/shimmerButtons"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivPoster"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="@color/text_white"
+                android:contentDescription="@string/image_description_poster"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/SourceSans.SemiBold"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/text_white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPoster" />
+
+            <ImageView
+                android:id="@+id/ivBookmark"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/text_white"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTitle" />
+
+            <ImageView
+                android:id="@+id/ivStar"
+                android:layout_width="60dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/text_white"
+                app:layout_constraintStart_toStartOf="@id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+            <TextView
+                android:id="@+id/tvGenre"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/text_white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/ivStar"
+                app:layout_constraintTop_toBottomOf="@id/ivStar" />
+
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/text_white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/tvGenre"
+                app:layout_constraintTop_toBottomOf="@id/tvGenre" />
+
+            <TextView
+                android:id="@+id/tvOverviewText"
+                style="@style/SourceSans.SemiBold"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/text_white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/tvReleaseDate"
+                app:layout_constraintTop_toBottomOf="@id/tvReleaseDate" />
+
+            <TextView
+                android:id="@+id/tvOverview"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/text_white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvOverviewText"
+                app:layout_constraintTop_toBottomOf="@id/tvOverviewText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:padding="16dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/text_white" />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/text_white" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

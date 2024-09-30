@@ -2,6 +2,7 @@ package com.notsatria.core.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.notsatria.core.R
 import com.notsatria.core.databinding.ItemMoviePosterBinding
@@ -20,7 +21,6 @@ class MovieAdapter : BaseRecyclerViewAdapter<Movie, ItemMoviePosterBinding>(list
 
     override fun bindItem(binding: ItemMoviePosterBinding, item: Movie, position: Int) {
         binding.apply {
-            root.setOnClickListener { callback?.onItemClicked(item) }
 
             ivBookmark.setOnClickListener { callback?.onFavoriteClicked(item) }
 
@@ -42,11 +42,14 @@ class MovieAdapter : BaseRecyclerViewAdapter<Movie, ItemMoviePosterBinding>(list
                 )
             tvRate.text = item.voteAverage.toString().subSequence(0, 3)
             ivPoster.onLoad("${Constant.POSTER_IMAGE_BASE_URL}${item.posterPath}")
+            ivPoster.transitionName = item.id.toString()
+
+            root.setOnClickListener { callback?.onItemClicked(item, ivPoster) }
         }
     }
 
     interface MovieAdapterCallback {
-        fun onItemClicked(movie: Movie)
+        fun onItemClicked(movie: Movie, ivPoster: ImageView)
         fun onFavoriteClicked(movie: Movie)
     }
 }

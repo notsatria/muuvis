@@ -21,4 +21,7 @@
     <string name="search_film">Cari film</string>
     <string name="image_description_poster">Image poster</string>
     <string name="overview">Overview</string>
+    <string name="released_on">Released on %1$s</string>
+    <string name="vote_average_vote_count">%1$s (%2$s)}</string>
+    <string name="movie_added_to_favorite">Movie added to favorite</string>
 </resources>

@@ -18,4 +18,22 @@ interface ApiService {
         @Path("movie_id") movieId: Int,
         @Query("language") language: String = "en-US"
     ): MovieDetailResponse
+
+    @GET("movie/popular")
+    suspend fun getPopularMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1,
+    ): MovieResponseList
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1,
+    ): MovieResponseList
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1,
+    ): MovieResponseList
 }

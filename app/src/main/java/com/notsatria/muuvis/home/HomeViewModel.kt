@@ -13,6 +13,12 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     val nowPlayingMovies = movieUseCase.getNowPlayingMovies().asLiveData()
 
+    val popularMovies = movieUseCase.getPopularMovies().asLiveData()
+
+    val topRatedMovies = movieUseCase.getTopRatedMovies().asLiveData()
+
+    val upcomingMovies = movieUseCase.getUpcomingMovies().asLiveData()
+
 //    val movieGenres = movieUseCase.getMovieGenres().asLiveData()
 
     fun setFavoriteMovie(movie: Movie, state: Boolean) {

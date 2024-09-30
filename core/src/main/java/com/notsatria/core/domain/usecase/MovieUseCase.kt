@@ -15,4 +15,9 @@ interface MovieUseCase {
 
     fun getMovieDetail(movieId: Int): Flow<Resource<MovieDetail>>
 
+    fun getPopularMovies(): Flow<Resource<List<Movie>>>
+
+    fun getTopRatedMovies(): Flow<Resource<List<Movie>>>
+
+    fun getUpcomingMovies(): Flow<Resource<List<Movie>>>
 }

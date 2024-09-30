@@ -8,7 +8,8 @@ import androidx.room.TypeConverters
 import com.notsatria.core.utils.Converters
 
 @Entity(tableName = "movie")
-data class MovieEntity(
+data class
+MovieEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo("id")

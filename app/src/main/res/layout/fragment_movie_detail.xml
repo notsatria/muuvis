@@ -82,24 +82,13 @@
                 tools:text="4.6 (200)" />
 
             <TextView
-                android:id="@+id/tvGenre"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/ivStar"
-                app:layout_constraintTop_toBottomOf="@id/ivStar"
-                tools:text="Genre, genre, genre" />
-
-            <TextView
                 android:id="@+id/tvReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tvGenre"
-                app:layout_constraintTop_toBottomOf="@id/tvGenre"
+                app:layout_constraintStart_toStartOf="@id/ivStar"
+                app:layout_constraintTop_toBottomOf="@id/ivStar"
                 tools:text="Released on 19 Feb 2023" />
 
             <TextView
@@ -137,6 +126,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWatchTrailer"
             style="@style/Widget.App.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -149,6 +139,7 @@
             android:layout_height="match_parent" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWatchNow"
             style="@style/Widget.App.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

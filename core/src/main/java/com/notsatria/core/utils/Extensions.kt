@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -48,8 +49,8 @@ fun ImageView.onLoad(path: String) {
 
 // Navigation extensions
 
-fun Fragment.navigateWithBundle(@IdRes resId: Int, bundle: Bundle) {
-    findNavController().navigate(resId, bundle)
+fun Fragment.navigateWithBundle(@IdRes resId: Int, bundle: Bundle, extras: Navigator.Extras? = null) {
+    findNavController().navigate(resId, bundle, null, extras)
 }
 
 fun Fragment.navigateById(@IdRes resId: Int) {

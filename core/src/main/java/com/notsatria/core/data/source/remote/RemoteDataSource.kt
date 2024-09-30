@@ -43,4 +43,58 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun getPopularMovies(): Flow<ApiResponse<List<MovieResponse>>> {
+        return flow {
+            try {
+                val response = apiService.getPopularMovies()
+                val dataList = response.results
+                if (dataList.isEmpty()) {
+                    emit(ApiResponse.Empty)
+                } else {
+                    emit(ApiResponse.Success(dataList))
+                    d("Popular Movies", dataList.toString())
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                d("Popular Movies", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getTopRatedMovies(): Flow<ApiResponse<List<MovieResponse>>> {
+        return flow {
+            try {
+                val response = apiService.getTopRatedMovies()
+                val dataList = response.results
+                if (dataList.isEmpty()) {
+                    emit(ApiResponse.Empty)
+                } else {
+                    emit(ApiResponse.Success(dataList))
+                    d("Top Rated", dataList.toString())
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                d("Top Rated", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getUpcomingMovies(): Flow<ApiResponse<List<MovieResponse>>> {
+        return flow {
+            try {
+                val response = apiService.getUpcomingMovies()
+                val dataList = response.results
+                if (dataList.isEmpty()) {
+                    emit(ApiResponse.Empty)
+                } else {
+                    emit(ApiResponse.Success(dataList))
+                    d("Upcoming Movies", dataList.toString())
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                d("Upcoming Movies", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

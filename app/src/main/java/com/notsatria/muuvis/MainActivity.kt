@@ -9,7 +9,6 @@ import com.notsatria.core.utils.gone
 import com.notsatria.core.utils.visible
 import com.notsatria.muuvis.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Locale.setDefault(Locale("id", "ID"))
+//        Locale.setDefault(Locale("id", "ID"))
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -33,7 +33,7 @@ fun MovieDetailResponse.toDomainModel(): MovieDetail {
         productionCompanies = productionCompanies.map { it.toDomainModel() },
         productionCountries = productionCountries.map { it.toDomainModel() },
         spokenLanguages = spokenLanguages.map { it.toDomainModel() },
-        belongsToCollection = belongsToCollection?.toDomainModel(),
+        belongsToCollection = belongsToCollection.toDomainModel(),
         popularity = popularity,
         voteCount = voteCount,
         tagline = tagline,

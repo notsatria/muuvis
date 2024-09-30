@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         upcomingAdapter = MovieAdapter()
 
         binding?.apply {
-
+            setupViews()
             setupRvNowPlaying()
             setupRvPopular()
             setupRvTopRated()
@@ -65,13 +65,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             postponeEnterTransition()
 
-            icSearch.setOnClickListener {
-                findNavController().navigate(
-                    R.id.navigation_search, null, NavOptions.Builder()
-                        .setPopUpTo(R.id.navigation_home, false)
-                        .build()
-                )
-            }
+
+        }
+    }
+
+    private fun FragmentHomeBinding.setupViews() {
+        tvSeeAllPopular.setOnClickListener {
+            showToast(getString(R.string.coming_soon))
+        }
+
+        tvSeeAllNowPlaying.setOnClickListener {
+            showToast(getString(R.string.coming_soon))
+        }
+
+        tvSeeAllTopRated.setOnClickListener {
+            showToast(getString(R.string.coming_soon))
+        }
+
+        tvSeeAllUpcoming.setOnClickListener {
+            showToast(getString(R.string.coming_soon))
+        }
+
+        icSearch.setOnClickListener {
+            findNavController().navigate(
+                R.id.navigation_search
+            )
         }
     }
 

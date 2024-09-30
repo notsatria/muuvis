@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_home, R.id.navigation_search, R.id.navigation_favorite, R.id.navigation_my_profile -> navView.visible()
+                R.id.navigation_home, R.id.navigation_search, R.id.navigation_favorite, R.id.navigation_settings -> navView.visible()
                 else -> navView.gone()
             }
 

@@ -4,14 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.notsatria.core.ui.BaseFragment
 import com.notsatria.core.utils.visibleIf
 import com.notsatria.muuvis.MainActivity
 import com.notsatria.muuvis.R
 import com.notsatria.muuvis.databinding.FragmentOnboardingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
+
+    private val viewModel: OnBoardingViewModel by viewModels()
+
     override fun inflateBinding(inflater: LayoutInflater): FragmentOnboardingBinding {
         return FragmentOnboardingBinding.inflate(inflater)
     }
@@ -38,6 +44,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
                 var subtitle = ""
 
                 btnLogin.setOnClickListener {
+                    viewModel.setUserIsLoggedIn(true)
                     startActivity(Intent(requireContext(), MainActivity::class.java))
                     requireActivity().finish()
                 }

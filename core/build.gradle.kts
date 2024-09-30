@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.datastore.preferences.core.jvm)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -80,4 +81,8 @@ dependencies {
     ksp(libs.roomCompiler)
     implementation(libs.roomKtx)
     implementation(libs.roomPaging)
+
+    // Datastore
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences)
 }

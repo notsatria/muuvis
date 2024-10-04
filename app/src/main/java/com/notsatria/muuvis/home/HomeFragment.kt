@@ -1,5 +1,7 @@
 package com.notsatria.muuvis.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -87,9 +89,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         icSearch.setOnClickListener {
-            findNavController().navigate(
-                R.id.navigation_search
-            )
+           val uri = Uri.parse("muuvis://search")
+            startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
     }
 

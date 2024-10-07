@@ -6,8 +6,11 @@ orbs:
   android: circleci/android@2.4.0
  
 jobs:
-  build:
-    executor: android/android
+  build-and-test:
+    executor:
+      name: android/android-machine
+      tag: default
+
     steps:
       - checkout
       - restore_cache:

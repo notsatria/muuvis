@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.dynamic.feature)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 android {
     namespace = "com.notsatria.search"
@@ -48,9 +48,9 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     // Dagger
     implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
+    ksp(libs.dagger.compiler)
 }

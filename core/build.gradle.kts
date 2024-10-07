@@ -2,7 +2,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
@@ -64,7 +63,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     // Glide
     implementation(libs.glide)

@@ -25,6 +25,7 @@ object Constant {
 - Dependency Injection: Dagger Hilt
 - Single Activity Multiple Fragments
 - Navigation: Jetpack Compose Navigation
+- Preferences: Datastore
 
 ## Screenshots
 | <img src="https://github.com/user-attachments/assets/7232b522-22ad-4f09-9d02-5e4586f7f9dc" width="250" /> | <img src="https://github.com/user-attachments/assets/5818f3e0-1bd9-4af4-8435-18839c478889" width="250" /> | <img src="https://github.com/user-attachments/assets/53578fab-8803-45bc-938b-eca4a7a16cb4" width="250" /> |

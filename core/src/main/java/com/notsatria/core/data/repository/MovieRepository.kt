@@ -19,6 +19,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import timber.log.Timber.Forest.d
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -58,8 +60,10 @@ class MovieRepository @Inject constructor(
     override fun setFavoriteMovie(movie: Movie, state: Boolean) {
         val movieEntity = MovieDataMapper.mapDomainToEntity(movie)
         movieEntity.isFavorite = state
-        CoroutineScope(Dispatchers.IO).launch {
-            localDataSource.updateFavoriteMovie(movieEntity.id, state)
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                localDataSource.updateFavoriteMovie(movieEntity.id, state)
+            }
         }
     }
 

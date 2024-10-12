@@ -88,4 +88,7 @@ dependencies {
     // Sql Chiper
     implementation(libs.android.database.sqlcipher)
     implementation(libs.androidx.sqlite.ktx)
+
+    // Crypto
+    implementation(libs.androidx.security.crypto)
 }

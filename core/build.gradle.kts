@@ -84,4 +84,8 @@ dependencies {
     // Datastore
     implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.datastore.preferences)
+
+    // Sql Chiper
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.sqlite.ktx)
 }

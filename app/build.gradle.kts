@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -81,4 +81,7 @@ dependencies {
 
     // Timber
     implementation(libs.timber)
+
+    // Leak Canary
+    debugImplementation(libs.leakcanary.android)
 }

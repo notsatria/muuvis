@@ -1,31 +1,24 @@
 package com.notsatria.core.ui
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseRecyclerViewAdapter<T, VB : ViewBinding>(
-    private var listItems: List<T>
-) : RecyclerView.Adapter<BaseRecyclerViewAdapter.BaseViewHolder<VB>>() {
+abstract class BaseListAdapter<T, VH : ViewBinding>(
+    diffUtil: DiffUtil.ItemCallback<T>
+) : ListAdapter<T, BaseListAdapter.BaseViewHolder<VH>>(diffUtil) {
+    class BaseViewHolder<VH : ViewBinding>(val binding: VH) : RecyclerView.ViewHolder(binding.root)
 
-    abstract fun inflateBinding(parent: ViewGroup, viewType: Int): VB
-    abstract fun bindItem(binding: VB, item: T, position: Int)
+    abstract fun inflateViewHolder(parent: ViewGroup, viewType: Int): VH
+    abstract fun bindItem(binding: VH, position: Int)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<VB> {
-        val binding = inflateBinding(parent, viewType)
-        return BaseViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<VH> {
+        return BaseViewHolder(inflateViewHolder(parent, viewType))
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<VB>, position: Int) {
-        bindItem(holder.binding, listItems[position], position)
+    override fun onBindViewHolder(holder: BaseViewHolder<VH>, position: Int) {
+        bindItem(holder.binding, position)
     }
-
-    override fun getItemCount(): Int = listItems.size
-
-    fun setItems(data: List<T>) {
-        listItems = data
-        notifyDataSetChanged()
-    }
-
-    class BaseViewHolder<VB : ViewBinding>(val binding: VB) : RecyclerView.ViewHolder(binding.root)
 }

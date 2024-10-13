@@ -11,9 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.notsatria.core.domain.model.Movie
 import com.notsatria.core.ui.BaseFragment
@@ -66,8 +64,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             observeMovies()
 
             postponeEnterTransition()
-
-
         }
     }
 
@@ -89,17 +85,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         icSearch.setOnClickListener {
-           val uri = Uri.parse("muuvis://search")
+            val uri = Uri.parse("muuvis://search")
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
     }
 
     private fun FragmentHomeBinding.setupRvNowPlaying() {
+        rvNowPlaying.adapter = nowPlayingAdapter
+        rvNowPlaying.setHasFixedSize(true)
         rvNowPlaying.doOnPreDraw {
             startPostponedEnterTransition()
         }
-        rvNowPlaying.adapter = nowPlayingAdapter
-        rvNowPlaying.setHasFixedSize(true)
 
         nowPlayingAdapter.callback = object : MovieAdapterCallback {
             override fun onItemClicked(movie: Movie, ivPoster: ImageView) {
@@ -242,7 +238,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
                 is Resource.Success -> {
                     showLoading(false)
-                    nowPlayingAdapter.setItems(result.data!!)
+                    nowPlayingAdapter.submitList(result.data!!)
                     includeHomeLoading.apply {
                         shimmer1.stopShimmer()
                     }
@@ -266,7 +262,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
 
                 is Resource.Success -> {
-                    popularAdapter.setItems(result.data!!)
+                    popularAdapter.submitList(result.data!!)
                     includeHomeLoading.apply {
                         shimmer2.stopShimmer()
                     }
@@ -289,7 +285,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
 
                 is Resource.Success -> {
-                    topRatedAdapter.setItems(result.data!!)
+                    topRatedAdapter.submitList(result.data!!)
                     includeHomeLoading.apply {
                         shimmer3.stopShimmer()
                     }
@@ -313,7 +309,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
 
                 is Resource.Success -> {
-                    upcomingAdapter.setItems(result.data!!)
+                    upcomingAdapter.submitList(result.data!!)
                     includeHomeLoading.apply {
                         shimmer4.stopShimmer()
                     }
@@ -344,7 +340,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    companion object {
-        const val TAG = "HomeFragment"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Clear adapters
+        binding?.rvNowPlaying?.adapter = null
+        binding?.rvPopular?.adapter = null
+        binding?.rvTopRated?.adapter = null
+        binding?.rvUpcoming?.adapter = null
+
+        // Clear adapter references
+        nowPlayingAdapter.callback = null
+        popularAdapter.callback = null
+        topRatedAdapter.callback = null
+        upcomingAdapter.callback = null
+
+        binding = null
     }
 }

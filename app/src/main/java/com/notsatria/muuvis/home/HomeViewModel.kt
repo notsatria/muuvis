@@ -19,8 +19,6 @@ class HomeViewModel @Inject constructor(
 
     val upcomingMovies = movieUseCase.getUpcomingMovies().asLiveData()
 
-//    val movieGenres = movieUseCase.getMovieGenres().asLiveData()
-
     fun setFavoriteMovie(movie: Movie, state: Boolean) {
         movieUseCase.setFavoriteMovie(movie, state)
     }

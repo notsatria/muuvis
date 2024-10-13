@@ -16,6 +16,7 @@ import com.notsatria.core.ui.BaseFragment
 import com.notsatria.core.ui.MovieAdapterCallback
 import com.notsatria.core.ui.MovieFavoriteAdapter
 import com.notsatria.core.utils.navigateWithBundle
+import com.notsatria.core.utils.visibleIf
 import com.notsatria.muuvis.R
 import com.notsatria.muuvis.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +48,8 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
             setupRvFavorite()
 
             favoriteViewModel.favoriteMovies.observe(viewLifecycleOwner) { movies ->
-                movieFavoriteAdapter.setItems(movies)
+                setupEmptyState(movies.isEmpty())
+                movieFavoriteAdapter.submitList(movies)
             }
         }
     }
@@ -93,5 +95,13 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
             message,
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private fun FragmentFavoriteBinding.setupEmptyState(condition: Boolean) {
+        includeEmptyState.apply {
+            ivImage.setImageResource(R.drawable.il_empty_favorite)
+            tvState.text = getString(R.string.no_favorite_movies_added_yet)
+            root.visibleIf(condition)
+        }
     }
 }

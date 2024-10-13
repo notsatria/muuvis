@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import com.notsatria.core.R
 import com.notsatria.core.databinding.ItemMoviePosterBinding
 import com.notsatria.core.domain.model.Movie
@@ -11,15 +12,16 @@ import com.notsatria.core.utils.Constant
 import com.notsatria.core.utils.formatStrToDate
 import com.notsatria.core.utils.onLoad
 
-class MovieAdapter : BaseRecyclerViewAdapter<Movie, ItemMoviePosterBinding>(listOf()) {
+class MovieAdapter : BaseListAdapter<Movie, ItemMoviePosterBinding>(diffUtil) {
 
     var callback: MovieAdapterCallback? = null
 
-    override fun inflateBinding(parent: ViewGroup, viewType: Int): ItemMoviePosterBinding {
+    override fun inflateViewHolder(parent: ViewGroup, viewType: Int): ItemMoviePosterBinding {
         return ItemMoviePosterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     }
 
-    override fun bindItem(binding: ItemMoviePosterBinding, item: Movie, position: Int) {
+    override fun bindItem(binding: ItemMoviePosterBinding, position: Int) {
+        val item = getItem(position)
         binding.apply {
 
             ivBookmark.setOnClickListener { callback?.onFavoriteClicked(item) }
@@ -45,6 +47,18 @@ class MovieAdapter : BaseRecyclerViewAdapter<Movie, ItemMoviePosterBinding>(list
             ivPoster.transitionName = item.id.toString()
 
             root.setOnClickListener { callback?.onItemClicked(item, ivPoster) }
+        }
+    }
+
+    companion object {
+        private val diffUtil = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

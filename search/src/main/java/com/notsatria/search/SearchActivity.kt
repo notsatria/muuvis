@@ -1,12 +1,10 @@
 package com.notsatria.search
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.notsatria.core.domain.model.Movie
 import com.notsatria.core.ui.MovieAdapterCallback
@@ -74,7 +72,7 @@ class SearchActivity : AppCompatActivity() {
     private fun searchMovies(query: String) {
         viewModel.searchMovies(query).observe(this) { movies ->
             binding.setupEmptyState(movies.isEmpty())
-            movieAdapter.setItems(movies)
+            movieAdapter.submitList(movies)
         }
     }
 

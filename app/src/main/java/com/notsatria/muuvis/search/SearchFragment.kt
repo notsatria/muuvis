@@ -54,7 +54,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private fun searchMovies(query: String) {
         searchViewModel.searchMovies(query).observe(viewLifecycleOwner) { movies ->
             setupEmptyState(movies.isEmpty())
-            movieAdapter.setItems(movies)
+            movieAdapter.submitList(movies)
         }
     }
 

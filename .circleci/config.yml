@@ -9,7 +9,7 @@ jobs:
   build-and-test:
     executor:
       name: android/android-machine
-      tag: default
+      resource-class: xlarge
 
     steps:
       - checkout
@@ -41,8 +41,9 @@ jobs:
           path: app/build/outputs/apk/debug/
           destination: artifact-file
       - run:
-          name: Run Core Instrumentation Test
+          name: Start Emulator and Run Instrumentation Tests
           command: ./gradlew core:connectedAndroidTest
+          system-image: system-images;android-34;google_apis;x86
       - store_test_results:
           path: app/build/instrumentation-test-results
 

@@ -91,4 +91,8 @@ dependencies {
 
     // Crypto
     implementation(libs.androidx.security.crypto)
+
+    // Instrumentation test
+    androidTestImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
+    androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
 }

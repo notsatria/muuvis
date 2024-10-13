@@ -92,7 +92,16 @@ dependencies {
     // Leak Canary
     debugImplementation(libs.leakcanary.android)
 
+    // Room
+    implementation(libs.room)
+    ksp(libs.roomCompiler)
+    implementation(libs.roomKtx)
+
     // Sql Chiper
     implementation(libs.android.database.sqlcipher)
     implementation(libs.androidx.sqlite.ktx)
+
+    // Instrumentation test
+    androidTestImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
+    androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
 }

@@ -11,7 +11,6 @@ import com.notsatria.core.utils.Converters
 data class
 MovieEntity(
     @PrimaryKey
-    @NonNull
     @ColumnInfo("id")
     var id: Int,
 

@@ -40,6 +40,14 @@ jobs:
       - store_artifacts:  
           path: app/build/outputs/apk/debug/
           destination: artifact-file
+      - run:
+          name: Run Core Unit Tests
+          command: ./gradlew core:test
+      - store_test_results:
+          path: app/build/test-results
+      - store_artifacts:
+          path: app/build/outputs/apk/debug/
+          destination: artifact-file
 #      - run:
 #          name: Start Emulator and Run Instrumentation Tests
 #          command: ./gradlew core:connectedAndroidTest

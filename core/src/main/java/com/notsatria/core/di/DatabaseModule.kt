@@ -29,7 +29,6 @@ class DatabaseModule {
             MovieDatabase::class.java, "Movie.db"
         )
             .openHelperFactory(supportFactory)
-            .fallbackToDestructiveMigration()
             .build()
     }
 

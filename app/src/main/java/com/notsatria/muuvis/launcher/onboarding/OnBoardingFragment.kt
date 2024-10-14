@@ -4,9 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.notsatria.core.ui.BaseFragment
 import com.notsatria.core.utils.visibleIf
 import com.notsatria.muuvis.MainActivity
 import com.notsatria.muuvis.R
@@ -14,16 +15,26 @@ import com.notsatria.muuvis.databinding.FragmentOnboardingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
+class OnBoardingFragment : Fragment() {
 
     private val viewModel: OnBoardingViewModel by viewModels()
 
-    override fun inflateBinding(inflater: LayoutInflater): FragmentOnboardingBinding {
-        return FragmentOnboardingBinding.inflate(inflater)
+    private var _binding: FragmentOnboardingBinding? = null
+    private val binding: FragmentOnboardingBinding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentOnboardingBinding.inflate(inflater)
+
+        return binding.root
     }
 
-    override fun onViewReady(view: View, savedInstanceState: Bundle?) {
-        binding?.apply {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
             setupViewPager()
         }
     }
@@ -82,5 +93,10 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             }
         })
 
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }

@@ -10,11 +10,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.notsatria.core.domain.model.Movie
-import com.notsatria.core.ui.BaseFragment
 import com.notsatria.core.ui.MovieAdapter
 import com.notsatria.core.ui.MovieAdapterCallback
 import com.notsatria.core.utils.Resource
@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber.Forest.d
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : Fragment() {
 
     private lateinit var nowPlayingAdapter: MovieAdapter
     private lateinit var popularAdapter: MovieAdapter
@@ -34,27 +34,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var upcomingAdapter: MovieAdapter
     private val homeViewModel: HomeViewModel by viewModels()
 
-    override fun inflateBinding(inflater: LayoutInflater): FragmentHomeBinding {
-        return FragmentHomeBinding.inflate(inflater)
-    }
+    private var _binding: FragmentHomeBinding? = null
+    private val binding: FragmentHomeBinding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         sharedElementEnterTransition = TransitionInflater.from(requireContext())
             .inflateTransition(android.R.transition.move)
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
 
-    override fun onViewReady(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentHomeBinding.inflate(inflater)
+
         nowPlayingAdapter = MovieAdapter()
         popularAdapter = MovieAdapter()
         topRatedAdapter = MovieAdapter()
         upcomingAdapter = MovieAdapter()
 
-        binding?.apply {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
             setupViews()
             setupRvNowPlaying()
             setupRvPopular()
@@ -342,18 +346,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Clear adapters
-        binding?.rvNowPlaying?.adapter = null
-        binding?.rvPopular?.adapter = null
-        binding?.rvTopRated?.adapter = null
-        binding?.rvUpcoming?.adapter = null
+        binding.apply {
+            rvNowPlaying.adapter = null
+            rvPopular.adapter = null
+            rvTopRated.adapter = null
+            rvUpcoming.adapter = null
+        }
+        _binding = null
 
-        // Clear adapter references
-        nowPlayingAdapter.callback = null
-        popularAdapter.callback = null
-        topRatedAdapter.callback = null
-        upcomingAdapter.callback = null
-
-        binding = null
     }
 }

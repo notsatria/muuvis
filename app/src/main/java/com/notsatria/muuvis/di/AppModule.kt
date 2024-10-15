@@ -4,6 +4,7 @@ import com.notsatria.core.domain.usecase.MovieInteractor
 import com.notsatria.core.domain.usecase.MovieUseCase
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton

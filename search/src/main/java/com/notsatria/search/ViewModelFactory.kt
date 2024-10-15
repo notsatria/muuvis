@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.notsatria.core.domain.usecase.MovieUseCase
 import javax.inject.Inject
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelFactory @Inject constructor(private val movieUseCase: MovieUseCase) :
     ViewModelProvider.NewInstanceFactory() {
 
